@@ -6,7 +6,7 @@
 
   "content_scripts": [{
     "matches": ["https://bvsd.infinitecampus.org/campus/portal/*"],
-    "js": ["script.js"]
+    "js": ["inject.js"]
   }],
 
 }
