@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "IC Grade Reader",
+  "description": "",
+  "version": "1.0",
+
+  "content_scripts": [{
+    "matches": ["https://bvsd.infinitecampus.org/campus/portal/*"],
+    "js": ["script.js"]
+  }],
+
+}
