@@ -23,3 +23,8 @@
     sum = sum + a;
   }
   console.log('Calculated GPA is = ' + sum / i + " SOLID!!!");
+  var gpa = sum/i;
+
+  chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+  console.log(response.farewell);
+});
