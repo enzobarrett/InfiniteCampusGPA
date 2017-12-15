@@ -25,4 +25,4 @@
   console.log('Calculated GPA is = ' + sum / i + " SOLID!!!");
   var gpa = sum/i;
 
-  chrome.runtime.sendMessage({gpa})
+  chrome.runtime.sendMessage({myVar: gpa});
