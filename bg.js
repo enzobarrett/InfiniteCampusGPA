@@ -6,7 +6,7 @@ chrome.runtime.onMessage.addListener(function(message) {
         type: "popup"
         });
         for (var i = 0; i < views.length; i++) {
-        views[i].document.getElementById('x').innerHTML = gpa;
+        views[i].document.getElementsByClassName('gpa').innerHTML = gpa;
       }
     }
 });
