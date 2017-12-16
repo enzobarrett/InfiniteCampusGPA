@@ -20,7 +20,7 @@ window.onload = function() {
 
   
   var letters = document.querySelectorAll('.inProgressGrade b');
-  var sum;
+  var sum = 0;
   
   for (i = 0; i < letters.length; i++) {
     var grade = letters[i].textContent;
