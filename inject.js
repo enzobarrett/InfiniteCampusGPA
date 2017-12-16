@@ -1,4 +1,3 @@
-window.onload = function() {
   function toGPA(x) {
     if (x == 'A') {
       return 4;
@@ -17,7 +16,7 @@ window.onload = function() {
     }
   }
   
-
+window.onload = function() {
   
   var letters = document.querySelectorAll('.inProgressGrade b');
   var sum = 0;
@@ -26,6 +25,6 @@ window.onload = function() {
     grade = toGPA(letters[i].textContent);
     sum += grade;
   }
-  console.log(sum);
+  console.log('Your GPA is = ' +sum/i);
     //chrome.runtime.sendMessage({myVar: gpa});
 }
