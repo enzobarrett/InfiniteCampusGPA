@@ -17,8 +17,11 @@ window.onload = function() {
     }
   }
   //  var a;
+  driver.switch_to_default_content()
+  frame = driver.find_element_by_name('frameDetail')
+  
   //  var sum = 0;
-  var letters = document.querySelectorAll('.inProgressGrade b');
+  var letters = document.frame.querySelectorAll('.inProgressGrade b');
   //for (i = 0; i < letters.length; i++) {
   var i = 0;
   console.log(letters[i].textContent);
