@@ -16,8 +16,9 @@
 
   "content_scripts": [{
     "matches": ["https://bvsd.infinitecampus.org/campus/portal/*"],
+    "all_frames": true,
     "js": ["inject.js"]
-    "all_frames": true
+    
   }]
 
 }
