@@ -17,14 +17,19 @@
   }
   
 window.onload = function() {
-  
+  var element = document.getElementsByClassName("title").innerHTML;
   var letters = document.querySelectorAll('.inProgressGrade b');
   var sum = 0;
   var grade;
+  var gpa;
+  
+  if (element == 'Grades') {
   for (i = 0; i < letters.length; i++) {
     grade = toGPA(letters[i].textContent);
-    sum += grade;
+    sum += grade;  
   }
-  console.log('Your GPA is = ' +sum/i);
-    //chrome.runtime.sendMessage({myVar: gpa});
+  gpa = sum/i;
+  console.log('Gpa is = ' + gpa)
+  } 
+  //chrome.runtime.sendMessage({myVar: gpa});
 }
