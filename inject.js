@@ -21,12 +21,11 @@ window.onload = function() {
   
   var letters = document.querySelectorAll('.inProgressGrade b');
   var sum = 0;
-  
+  var grade;
   for (i = 0; i < letters.length; i++) {
-    var grade = letters[i].textContent;
-    console.log(grade);
+    grade = toGPA(letters[i].textContent);
     sum += grade;
   }
-  console.log('And the sum is = ' + sum);
+  console.log(sum);
     //chrome.runtime.sendMessage({myVar: gpa});
 }
