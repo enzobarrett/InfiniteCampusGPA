@@ -17,6 +17,14 @@
   }
   
 window.onload = function() {
+  
+    var finalvar = "";
+  var arr = document.getElementsByClassName('title');
+  for (i=0; i<arr.length; i++) {
+         finalval = finalval + arr[i].value;
+  }
+  console.log(finalval);
+  /*
   var element = document.getElementsByClassName("bodyBorder title").innerHTML;
   console.log(element);
   var letters = document.querySelectorAll('.inProgressGrade b');
@@ -36,4 +44,5 @@ window.onload = function() {
     console.log(element);
   //chrome.runtime.sendMessage({myVar: gpa});
 }
+*/
 }
