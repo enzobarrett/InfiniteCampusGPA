@@ -35,3 +35,4 @@ window.onload = function() {
     console.log(element);
   //chrome.runtime.sendMessage({myVar: gpa});
 }
+}
