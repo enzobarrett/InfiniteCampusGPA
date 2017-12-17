@@ -17,7 +17,8 @@
   }
   
 window.onload = function() {
-  var element = document.getElementsByClassName("title").innerHTML;
+  var element = document.getElementsByClassName("bodyBorder title").innerHTML;
+  console.log(element);
   var letters = document.querySelectorAll('.inProgressGrade b');
   var sum = 0;
   var grade;
