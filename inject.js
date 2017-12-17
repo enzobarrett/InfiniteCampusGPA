@@ -30,6 +30,8 @@ window.onload = function() {
   }
   gpa = sum/i;
   console.log('Gpa is = ' + gpa)
-  } 
+  } else {
+    console.log('Please Navigate to "Grades"');
+    console.log(element);
   //chrome.runtime.sendMessage({myVar: gpa});
 }
