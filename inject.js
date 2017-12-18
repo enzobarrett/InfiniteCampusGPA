@@ -30,7 +30,7 @@ window.onload = function() {
     sum += grade;  
   }
   gpa = sum/i;
-  if (isNaN(gpa)) {console.log('Gpa is = ' + gpa)}
+  if (!isNaN(gpa)) {console.log('Gpa is = ' + gpa)}
   //chrome.runtime.sendMessage({myVar: gpa});
 
 }
