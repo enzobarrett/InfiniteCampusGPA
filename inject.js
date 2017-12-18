@@ -31,6 +31,33 @@ window.onload = function() {
   }
   gpa = sum/i;
   if (!isNaN(gpa)) {console.log('Gpa is = ' + gpa)}
-  //chrome.runtime.sendMessage({myVar: gpa});
-
+  chrome.runtime.sendMessage({myVar: gpa});
+  console.log('GPA has been sent to background page');
+  console.log(  .-------.
+      *         | #     |    *
+                |_______|         *
+               _|=======|_             *
+   *          [___________]
+               .'       `.   *   | /  
+              :   @   @   :     \|/_
+              :     <     :     //   
+     \~_s~-~s~s`._`...'_.'     //      *
+  *   `--~-~-~~s~/`"""'  `-.  //
+            /'/s/   _       `//
+           / /s/   (_)       /
+          ///s/     _        :  *
+    *    ///s/     (_)      .'          *
+        // |/`.           .'
+     __//    .-''-------'`-.
+      /|\  .'       _       `.      *
+     / | \:        (_)        :
+         :          _          :
+         :         (_)         :
+  *      :          _          :     *
+         :         (_)         :
+          :                   :
+  ""'"""'""`.               .'"'"""'""'""
+             `-._       _.-'
+                 `"""""'
+);
 }
