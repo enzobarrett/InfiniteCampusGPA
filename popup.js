@@ -1,10 +1,9 @@
+console.log('popup.js running');
 var gpa;
-chrome.runtime.onMessage.addListener(function(message) {
-  if (message.gpa) {
-    console.log('message received!');
-    gpa = message.gpa;
-    console.log('gpa is = ' + gpa);
-    document.getElementsByClassName('gpa').innerHTML = gpa;
+console.log('sending message...');
+chrome.runtime.sendMessage({gpaplease: "Background page please get me the gpa"}, function(response) {
+  gpa = response.newgpa;
+     console.log('response recieved');
+      document.getElementsByClassName('gpa').textContent = gpa;
     console.log('inner html set!');
-    }
 });
