@@ -1,8 +1,10 @@
 var gpa;
 chrome.runtime.onMessage.addListener(function(message) {
     if (message.myVar) {
+        console.log('message received!');
         gpa = message.myVar;
-        console.log(gpa);
+        
+        console.log('gpa is = ' + gpa);
         var views = chrome.extension.getViews({
         type: "popup"
         });
