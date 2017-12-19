@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
     if (message.gpaplease) {
         console.log('message recieved from popup');
-        chrome.runtime.sendMessage({newgpa: gpa})
+        sendResponse({newgpa: gpa});
     }
                                    
 });
