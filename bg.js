@@ -1,5 +1,5 @@
 var gpa;
-chrome.runtime.onMessage.addListener(function(message, sendResponse) {
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (message.myVar) {
         console.log('message received!');
         gpa = message.myVar;
