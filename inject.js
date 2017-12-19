@@ -1,4 +1,4 @@
-  function toGPA(x) {
+function toGPA(x) {
     if (x == 'A') {
       return 4;
     }
@@ -15,28 +15,24 @@
       return 0;
     }
   }
-  document.getElementsByClassName("inProgressGrade").onload = function() {
-    main()
-  }
+  
+window.onload = function() {
 
-  function main() {
-    var letters = document.querySelectorAll('.inProgressGrade b');
-    var sum = 0;
-    var grade;
-    var gpa;
-
-    for (var i = 0; i < letters.length; i++) {
-      grade = toGPA(letters[i].textContent);
-      sum += grade;
-      console.log(sum);
-    }
-    gpa = sum / i;
-    console.log(gpa);
-    if (!isNaN(gpa)) {
-      console.log('Gpa is = ' + gpa);
-      chrome.runtime.sendMessage({
-        myVar: gpa
-      });
-      console.log('GPA has been sent to background page');
-    }
+ 
+  var element = document.getElementsByClassName("bodyBorder title").innerHTML;
+  var letters = document.querySelectorAll('.inProgressGrade b');
+  var sum = 0;
+  var grade;
+  var gpa;
+  
+  for (i = 0; i < letters.length; i++) {
+    grade = toGPA(letters[i].textContent);
+    sum += grade;  
   }
+  gpa = sum/i;
+  if (!isNaN(gpa)) {
+  console.log('Gpa is = ' + gpa);
+  chrome.runtime.sendMessage({myVar: gpa});
+  console.log('GPA has been sent to background page');
+  }
+}
