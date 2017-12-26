@@ -15,19 +15,19 @@ function toGPA(x) {
       return 0;
     }
   }
-  
-window.onload = function() {
 
- 
+window.onload = function() {
+console.log('test test test');
+
   var element = document.getElementsByClassName("bodyBorder title").innerHTML;
   var letters = document.querySelectorAll('.inProgressGrade b');
   var sum = 0;
   var grade;
   var gpa;
-  
+
   for (i = 0; i < letters.length; i++) {
     grade = toGPA(letters[i].textContent);
-    sum += grade;  
+    sum += grade;
   }
   gpa = sum/i;
   if (!isNaN(gpa)) {
