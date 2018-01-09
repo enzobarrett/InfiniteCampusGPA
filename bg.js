@@ -2,7 +2,7 @@ var gpa;
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.myVar) {
     console.log('message received!');
-    gpa = message.myVar;
+    gpa = request.myVar;
     console.log('gpa is = ' + gpa);
   }
     chrome.runtime.onMessage.addListener(
