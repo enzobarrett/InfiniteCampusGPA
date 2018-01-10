@@ -1,24 +1,19 @@
 {
   "manifest_version": 2,
-  "name": "IC Grade Reader",
+  "name": "EyeSeeGrades",
   "description": "",
-  "version": "1.0",
-
+  "version": "0.0.0.1",
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"
   },
-
   "background": {
     "persistent": true,
     "scripts": ["bg.js"]
   },
-
   "content_scripts": [{
     "matches": ["https://bvsd.infinitecampus.org/campus/portal/*"],
     "all_frames": true,
     "js": ["inject.js"]
-    
   }]
-
 }
