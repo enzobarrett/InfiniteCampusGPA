@@ -3,7 +3,7 @@ chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
   if (isNaN(gpa)) {
 
     document.getElementById('gpa').innerHTML =
-    "To recieve a gpa please navigate to the \"grades\" section of Infinite Campus";
+    "To receive a gpa please navigate to the \"grades\" section of Infinite Campus";
     document.getElementById('html').style.minWidth = "100px";
   //document.html.style.maxWidth = "200px";
   } else {
