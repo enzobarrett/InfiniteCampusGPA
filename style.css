@@ -13,12 +13,6 @@ html {
   position: relative;
   top: 3px;
 }
-/*  fieldset {
-    margin: 30px auto 0;
-    width: 320px;
-    text-align: left;
-  }*/
-
   form {
   	border-top: 1px solid #c8c7cc;
   	border-bottom: 1px solid #c8c7cc;
