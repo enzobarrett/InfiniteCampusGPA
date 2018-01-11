@@ -5,7 +5,6 @@ function toGPA(x) {
   if (x == 'D') {return 1;}
   if (x == 'F') {return 0;}
 };
-var element = document.getElementsByClassName("bodyBorder title").innerHTML;
 var letters = document.querySelectorAll('.inProgressGrade b');
 var sum = 0;
 var grade;
@@ -16,7 +15,5 @@ for (i = 0; i < letters.length; i++) {
 }
 gpa = sum / i;
 if (!isNaN(gpa)) {
-  chrome.runtime.sendMessage({
-    myVar: gpa
-  });
+  chrome.runtime.sendMessage({myVar: gpa});
 }
