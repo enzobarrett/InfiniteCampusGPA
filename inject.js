@@ -2,7 +2,7 @@ all();
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.buttonclick == "hello")
-      location = location;
+      //location = location;
       all();
   });
   function all() {
