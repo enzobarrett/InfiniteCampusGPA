@@ -22,8 +22,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (buttonstate == false) {
       sendResponse({response: false});
     }
-  }
-  else {
+  } else {
     sendResponse({farewell: gpa});
   }
 });
