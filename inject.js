@@ -1,9 +1,25 @@
+chrome.runtime.sendMessage({recievecheckstate: "hello"}, function(response) {
+  var checkstate = response.response;
+  if (checkstate == true) {
+    var classroomgrade = '.finalGrade b';
+  }
+  if (checkstate == false) {
+    var classroomgrade = '.inProgressGrade b';
+  }
+});
 all();
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if (request.buttonclick == "hello")
+    if (request.buttonclick == "hello") {
+    console.log("Reload");
       //location = location;
+      console.log("am i being executed?");
       all();
+    }
+    if (request.checkboxstate == "hello") {
+
+    }
+
   });
   function all() {
     chrome.runtime.sendMessage({button: "test"}, function(response) {
@@ -16,7 +32,7 @@ chrome.runtime.onMessage.addListener(
           if (x == 'F') {return 0;}
         };
 
-        console.log("pagerunning");
+      //  console.log("pagerunning");
         var gradetop;
         var r;
         var grade;
@@ -32,10 +48,10 @@ chrome.runtime.onMessage.addListener(
         var gpa;
         //grade = document.querySelectorAll('.inProgressGrade b');
         //classtitle = document.querySelectorAll('.gradesLink b');
-        grade = document.querySelectorAll('.inProgressGrade b');
+        grade = document.querySelectorAll();
         for (i = 0; i < grade.length; i++) {
           //console.log("entered first loop");
-          grade = document.querySelectorAll('.inProgressGrade b');
+          grade = document.querySelectorAll(classroomgrade);
           gradetop = grade[i].getBoundingClientRect();
           var classtitle = document.querySelectorAll('.gradesLink b');
 
@@ -49,11 +65,11 @@ chrome.runtime.onMessage.addListener(
 
 
           content = classtitle[r].textContent;
-          console.log(content);
-        console.log(gradetop.top);
+        //  console.log(content);
+        //console.log(gradetop.top);
             diffrence = gradetop.top - classname.top;
 
-            console.log(diffrence);
+          //  console.log(diffrence);
 
 
             if (diffrence > 0 && diffrence < 80) {
@@ -64,7 +80,7 @@ chrome.runtime.onMessage.addListener(
               if (index > -1 || ap > -1 || pib > -1) {
                 console.log("Is a weighted class");
                 sum += 1;
-                console.log(sum);
+                //console.log(sum);
               }
            }
         }
@@ -72,12 +88,13 @@ chrome.runtime.onMessage.addListener(
         sum += letter;
 
         }
-        console.log(sum);
-        var gpa = sum/i;
-        console.log(gpa);
+      //  console.log(sum);
+        gpa = sum/i;
+        var rounded = gpa.toFixed(2);
+    //    console.log(gpa);
         if (!isNaN(gpa)) {
         chrome.runtime.sendMessage({
-          myVar: gpa
+          myVar: rounded
         });
         }
       }
@@ -90,7 +107,7 @@ chrome.runtime.onMessage.addListener(
           if (x == 'F') {return 0;}
         };
         var element = document.getElementsByClassName("bodyBorder title").innerHTML;
-        var letters = document.querySelectorAll('.inProgressGrade b');
+        var letters = document.querySelectorAll(classroomgrade);
         var sum = 0;
         var grade;
         var gpa;
@@ -99,10 +116,9 @@ chrome.runtime.onMessage.addListener(
           sum += grade;
         }
         gpa = sum / i;
+        var rounded = gpa.toFixed(2);
         if (!isNaN(gpa)) {
-          chrome.runtime.sendMessage({
-            myVar: gpa
-          });
+          chrome.runtime.sendMessage({myVar: rounded});
         }
 
       }

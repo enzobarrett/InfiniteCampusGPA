@@ -26,7 +26,26 @@ function refresh() {
     }
   });
 }
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById("checkbox69").addEventListener("click", checkbox);
+});
 
+function checkbox() {
+  console.log("Funtion checkbox has been triggered");
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+  chrome.tabs.sendMessage(tabs[0].id, {checkboxstate: "hello"}, function(response) {});
+});
+  timeoutID = window.setTimeout(refresh, 300);
+  var checked = document.getElementById('checkbox69').checked
+  if (checked == false) {
+    chrome.runtime.sendMessage({checkboxstate: false});
+    console.log("sent state of false");
+  } else {
+    chrome.runtime.sendMessage({checkboxstate: true});
+    console.log("sent state of true");
+  }
+
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("toggle_tomorrow_summary").addEventListener("click", buttontoggle);
@@ -37,7 +56,7 @@ function buttontoggle() {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
   chrome.tabs.sendMessage(tabs[0].id, {buttonclick: "hello"}, function(response) {});
 });
-  timeoutID = window.setTimeout(refresh, 500);
+  timeoutID = window.setTimeout(refresh, 300);
   var checked = document.getElementById('toggle_tomorrow_summary').checked
   if (checked == false) {
     chrome.runtime.sendMessage({buttonstate: false});

@@ -1,6 +1,25 @@
 var gpa;
 var buttonstate;
+var checkboxstate;
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  if (request.checkboxstate == true) {
+    checkboxstate = true;
+  }
+  if (request.checkboxstate == false) {
+    checkboxstate = false
+  }
+  if (request.recievecheckstate == "hello") {
+    if (checkboxstate == null) {
+      sendResponse({response: false});
+    }
+    if (checkboxstate == true) {
+      console.log("request for buttonstate recieved sending to popup");
+      sendResponse({response: true});
+    }
+    if (checkboxstate == false) {
+      sendResponse({response: false});
+    }
+  }
   if (request.myVar) {gpa = request.myVar;}
   if (request.buttonstate == false) {
     buttonstate = false;
