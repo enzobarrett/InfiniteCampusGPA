@@ -1,10 +1,11 @@
+var classroomgrade;
 chrome.runtime.sendMessage({recievecheckstate: "hello"}, function(response) {
   var checkstate = response.response;
   if (checkstate == true) {
-    var classroomgrade = '.finalGrade b';
+    classroomgrade = '.finalGrade b';
   }
   if (checkstate == false) {
-    var classroomgrade = '.inProgressGrade b';
+    classroomgrade = '.inProgressGrade b';
   }
 });
 all();
