@@ -27,11 +27,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.myVar) {gpa = request.myVar;}
   if (request.buttonstate == false) {
     buttonstate = false;
-    console.log("changed buttonstate to false");
+    //console.log("changed buttonstate to false");
   }
   if (request.buttonstate == true) {
     buttonstate = true;
-    console.log("changed buttonstate to true");
+    //console.log("changed buttonstate to true");
   }
   if (request.button) {
     //console.log("recieved message from popup");

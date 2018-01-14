@@ -11,11 +11,11 @@
   });
   chrome.runtime.sendMessage({recievecheckstate: "test"}, function(response) {
     if (response.response == true) {
-      console.log("checkbox checked");
+      //console.log("checkbox checked");
       document.getElementById("checkbox69").checked = true;
     }
     if (response.response == false) {
-      console.log("unchecked checkbox");
+      //console.log("unchecked checkbox");
       document.getElementById("checkbox69").checked = false;
     }
   });
@@ -42,17 +42,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function checkbox() {
-  console.log("Funtion checkbox has been triggered");
+  //console.log("Funtion checkbox has been triggered");
 
 
   var checked = document.getElementById('checkbox69').checked
   if (checked == false) {
     chrome.runtime.sendMessage({checkboxstate: false});
-    console.log("sent state of false");;
+    //console.log("sent state of false");;
 
   } else {
     chrome.runtime.sendMessage({checkboxstate: true});
-    console.log("sent state of true");
+    //console.log("sent state of true");
   }
 
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -70,14 +70,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function buttontoggle() {
 
-console.log("functiom buttontoggle has been triggered");
+//console.log("functiom buttontoggle has been triggered");
   var checked = document.getElementById('toggle_tomorrow_summary').checked
   if (checked == false) {
   chrome.runtime.sendMessage({buttonstate: false});
-  console.log("sent state of false");
+  //console.log("sent state of false");
   } else {
   chrome.runtime.sendMessage({buttonstate: true});
-  console.log("sent state of true");
+  //console.log("sent state of true");
   }
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {buttonclick: "hello"}, function(response) {

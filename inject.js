@@ -1,30 +1,30 @@
 window.setTimeout(all, 200);
 stage1();
 var classroomgrade;
-console.log("running");
+//console.log("running");
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.buttonclick) {
-    console.log("Reload");
+    //console.log("Reload");
        reload();
 }
   });
-console.log("i go here");
+//console.log("i go here");
 function reload() {
   window.setTimeout(all, 200);
   stage1();
 }
 
   function stage1() {
-    console.log("not here yet..");
+    //console.log("not here yet..");
     chrome.runtime.sendMessage({recievecheckstate: "hello"}, function(response) {
       var checkstate = response.response;
       if (checkstate == true) {
-        console.log("sem 1");
+        //console.log("sem 1");
         classroomgrade = document.querySelectorAll('.finalGrade b');
       }
       if (checkstate == false) {
-        console.log("semester 2");
+        //console.log("semester 2");
         classroomgrade = document.querySelectorAll('.inProgressGrade b');
       }
     });
@@ -68,13 +68,13 @@ function reload() {
             diffrence = gradetop.top - classname.top;
 
               if (diffrence > 0 && diffrence < 80) {
-              console.log("diffrence is less than 100");
+              //console.log("diffrence is less than 100");
               index = content.search("WT");
               ap = content.search("AP");
               pib = content.search("PIB");
 
                 if (index > -1 || ap > -1 || pib > -1) {
-                  console.log("Is a weighted class");
+                  //console.log("Is a weighted class");
                   sum += 1;
                 }
              }
