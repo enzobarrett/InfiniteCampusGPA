@@ -60,7 +60,7 @@ function checkbox() {
       //console.log(response.farewell);
     });
   });
-  window.setTimeout(refresh, 300);
+  window.setTimeout(refresh, 250);
 
 }
 
@@ -84,5 +84,5 @@ console.log("functiom buttontoggle has been triggered");
       //console.log(response.farewell);
     });
   });
-  window.setTimeout(refresh, 300);
+  window.setTimeout(refresh, 250);
 }
