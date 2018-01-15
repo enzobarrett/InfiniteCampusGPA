@@ -20,7 +20,7 @@ function reload() {
     chrome.runtime.sendMessage({recievecheckstate: "hello"}, function(response) {
       var checkstate = response.response;
       if (checkstate == true) {
-        console.log("sem 1");
+        //console.log("sem 1");
         classroomgrade = document.querySelectorAll('.finalGrade b');
       }
       if (checkstate == false) {
@@ -31,11 +31,11 @@ function reload() {
   };
 
   function toGPA(x) {
-    if (x == 'A') {return 4;}
-    if (x == 'B') {return 3;}
-    if (x == 'C') {return 2;}
-    if (x == 'D') {return 1;}
-    if (x == 'F') {return 0;}
+    if (x == 'A' || x == 'A+' || x == 'A-') {return 4;}
+    if (x == 'B' || x == 'B+' || x == 'B-') {return 3;}
+    if (x == 'C' || x == 'C+' || x == 'C-') {return 2;}
+    if (x == 'D' || x == 'D+' || x == 'D-') {return 1;}
+    if (x == 'F' || x == 'F+' || x == 'F-') {return 0;}
   };
 
     function all() {
@@ -55,20 +55,24 @@ function reload() {
           var diffrence;
           var classtitle;
           var gpa;
-            classtitle = document.querySelectorAll('.gradesLink b');
-            for (r = 0; r < classtitle.length; r += 2) {
-            console.log(classroomgrade.lenght);
-            console.log("went through loop 1");
+          var number_grades = 0;
+//console.log(classroomgrade);
+          for (i = 0; i < classroomgrade.length; i++) {
+          //  console.log(classroomgrade.lenght);
+            //console.log("went through loop 1");
             gradetop = classroomgrade[i].getBoundingClientRect();
+            classtitle = document.querySelectorAll('.gradesLink b');
 
+            for (r = 0; r < classtitle.length; r += 2) {
 
-
-for (i = 0; i < classroomgrade.length; i++) {
             classname = classtitle[r].getBoundingClientRect();
             content = classtitle[r].textContent;
             diffrence = gradetop.top - classname.top;
 
               if (diffrence > 0 && diffrence < 80) {
+                number_grades++;
+                var letter = toGPA(classroomgrade[i].textContent);
+                sum += letter;
               //console.log("found match");
               index = content.search("WT");
               ap = content.search("AP");
@@ -80,15 +84,17 @@ for (i = 0; i < classroomgrade.length; i++) {
                 }
              }
           }
-          var letter = toGPA(classroomgrade[i].textContent);
-          sum += letter;
+
           //console.log(letter);
           }
           console.log(i);
-          gpa = sum/i;
+          gpa = sum/number_grades;
           var rounded = gpa.toFixed(2);
           if (!isNaN(gpa)) {
           chrome.runtime.sendMessage({myVar: rounded});
+          console.log(sum);
+          console.log(i);
+          console.log(gpa);
           }
         }
 
@@ -108,16 +114,29 @@ for (i = 0; i < classroomgrade.length; i++) {
           var sum = 0;
           var grade;
           var gpa;
+          var number_grades = 0;
           for (i = 0; i < classroomgrade.length; i++) {
-            grade = toGPA(classroomgrade[i].textContent);
-            sum += grade;
+  classtitle = document.querySelectorAll('.gradesLink b');
+for (r = 0; r < classtitle.length; r += 2) {
+  gradetop = classroomgrade[i].getBoundingClientRect();
+
+  classname = classtitle[r].getBoundingClientRect();
+  diffrence = gradetop.top - classname.top;
+              if (diffrence > 0 && diffrence < 80) {
+                number_grades++;
+                grade = toGPA(classroomgrade[i].textContent);
+                sum += grade;
           }
-          gpa = sum / i;
-          var rounded = gpa.toFixed(2);
-          if (!isNaN(gpa)) {
-            chrome.runtime.sendMessage({myVar: rounded});
-          }
+        }
+
 
         }
-        });
+        gpa = sum / number_grades;
+        var rounded = gpa.toFixed(2);
+        if (!isNaN(gpa)) {
+          chrome.runtime.sendMessage({myVar: rounded});
+        }
       }
+
+});
+}

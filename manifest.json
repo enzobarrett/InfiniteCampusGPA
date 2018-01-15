@@ -13,6 +13,9 @@
     "persistent": true,
     "scripts": ["bg.js"]
   },
+  "permissions": [
+          "tabs"
+        ],
   "content_scripts": [{
     "matches": ["https://bvsd.infinitecampus.org/campus/portal/*"],
     "all_frames": true,
