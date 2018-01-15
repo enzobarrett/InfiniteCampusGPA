@@ -20,7 +20,7 @@ function reload() {
     chrome.runtime.sendMessage({recievecheckstate: "hello"}, function(response) {
       var checkstate = response.response;
       if (checkstate == true) {
-        //console.log("sem 1");
+        console.log("sem 1");
         classroomgrade = document.querySelectorAll('.finalGrade b');
       }
       if (checkstate == false) {
@@ -55,34 +55,36 @@ function reload() {
           var diffrence;
           var classtitle;
           var gpa;
-
-          for (i = 0; i < classroomgrade.length; i++) {
-
-            gradetop = classroomgrade[i].getBoundingClientRect();
             classtitle = document.querySelectorAll('.gradesLink b');
-
             for (r = 0; r < classtitle.length; r += 2) {
+            console.log(classroomgrade.lenght);
+            console.log("went through loop 1");
+            gradetop = classroomgrade[i].getBoundingClientRect();
 
+
+
+for (i = 0; i < classroomgrade.length; i++) {
             classname = classtitle[r].getBoundingClientRect();
             content = classtitle[r].textContent;
             diffrence = gradetop.top - classname.top;
 
               if (diffrence > 0 && diffrence < 80) {
-              //console.log("diffrence is less than 100");
+              //console.log("found match");
               index = content.search("WT");
               ap = content.search("AP");
               pib = content.search("PIB");
 
                 if (index > -1 || ap > -1 || pib > -1) {
-                  //console.log("Is a weighted class");
+                  //console.log("adding 1");
                   sum += 1;
                 }
              }
           }
           var letter = toGPA(classroomgrade[i].textContent);
           sum += letter;
+          //console.log(letter);
           }
-
+          console.log(i);
           gpa = sum/i;
           var rounded = gpa.toFixed(2);
           if (!isNaN(gpa)) {
