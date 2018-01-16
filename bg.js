@@ -1,4 +1,5 @@
 var gpa;
+var gpa_unweighted;
 var buttonstate;
 var checkboxstate;
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
@@ -24,7 +25,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             //console.log("sending false");
     }
   }
-  if (request.myVar) {gpa = request.myVar;}
+  if (request.not_weighted) {gpa_unweighted = request.not_weighted}
+  if (request.weighted) {gpa = request.weighted}
+  if (request.gpa_unweighted) {sendResponse({gpa: gpa_unweighted})}
+  if (request.gpa) {sendResponse({gpa: gpa})}
   if (request.buttonstate == false) {
     buttonstate = false;
     //console.log("changed buttonstate to false");

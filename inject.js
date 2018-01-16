@@ -1,142 +1,113 @@
-window.setTimeout(all, 200);
-stage1();
+/*window.setTimeout(all, 200);
+stage1();*/
+var gradetop;
+var classname;
+var diffrence;
+//variables that help determine if the class is weighted
+var content;
+var index;
+var ap;
+var pib;
+var classtitle;
+var weighted = false;
+//variables in the final calulation of the gpa
+var sum = 0;
+var gpa;
+var number_grades = 0;
+
+
 var classroomgrade;
-//console.log("running");
+/*//console.log("running");
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.buttonclick) {
     //console.log("Reload");
        reload();
 }
-  });
+});*/
 //console.log("i go here");
-function reload() {
+/*function reload() {
   window.setTimeout(all, 200);
   stage1();
+}*/
+chrome.runtime.sendMessage({recievecheckstate: "hello"}, function(response) {
+  var checkstate = response.response;
+  if (checkstate == true) {
+    console.log("sem 1");
+    classroomgrade = document.querySelectorAll('.finalGrade b');
+    window.setTimeout(delay, 0);
+  }
+  if (checkstate == false) {
+    console.log("semester 2");
+    classroomgrade = document.querySelectorAll('.inProgressGrade b');
+    window.setTimeout(delay, 0);
+  }
+});
+
+function letter_to_number(x) {
+  if (x == 'A' || x == 'A+' || x == 'A-') {return 4;}
+  if (x == 'B' || x == 'B+' || x == 'B-') {return 3;}
+  if (x == 'C' || x == 'C+' || x == 'C-') {return 2;}
+  if (x == 'D' || x == 'D+' || x == 'D-') {return 1;}
+  if (x == 'F' || x == 'F+' || x == 'F-') {return 0;}
+};
+
+function check_if_weighted(x) {
+  index = x.search("WT");
+  ap = x.search("AP");
+  pib = x.search("PIB");
+  if (index > -1 || ap > -1 || pib > -1) {
+    sum += 1;
+  }
 }
 
-  function stage1() {
-    //console.log("not here yet..");
-    chrome.runtime.sendMessage({recievecheckstate: "hello"}, function(response) {
-      var checkstate = response.response;
-      if (checkstate == true) {
-        //console.log("sem 1");
-        classroomgrade = document.querySelectorAll('.finalGrade b');
-      }
-      if (checkstate == false) {
-        //console.log("semester 2");
-        classroomgrade = document.querySelectorAll('.inProgressGrade b');
-      }
-    });
-  };
+function delay() {
 
-  function toGPA(x) {
-    if (x == 'A' || x == 'A+' || x == 'A-') {return 4;}
-    if (x == 'B' || x == 'B+' || x == 'B-') {return 3;}
-    if (x == 'C' || x == 'C+' || x == 'C-') {return 2;}
-    if (x == 'D' || x == 'D+' || x == 'D-') {return 1;}
-    if (x == 'F' || x == 'F+' || x == 'F-') {return 0;}
-  };
+      //variables with height calculation
 
-    function all() {
-      chrome.runtime.sendMessage({button: "test"}, function(response) {
 
-      //weighted section
-        //console.log(response.response);
-        if (response.response == true) {
-          var gradetop;
-          var r;
-          var content;
-          var index;
-          var ap;
-          var pib;
-          var sum = 0;
-          var classname;
-          var diffrence;
-          var classtitle;
-          var gpa;
-          var number_grades = 0;
-//console.log(classroomgrade);
-          for (i = 0; i < classroomgrade.length; i++) {
-          //  console.log(classroomgrade.lenght);
-            //console.log("went through loop 1");
-            gradetop = classroomgrade[i].getBoundingClientRect();
-            classtitle = document.querySelectorAll('.gradesLink b');
+  for (f = 0;  f < 2; f++){
+    if (f == 1) {
+      weighted = true;
+      console.log("weighted = true");
+    }
+      for (i = 0; i < classroomgrade.length; i++) {
 
-            for (r = 0; r < classtitle.length; r += 2) {
+        gradetop = classroomgrade[i].getBoundingClientRect();
+        classtitle = document.querySelectorAll('.gradesLink b');
 
-            classname = classtitle[r].getBoundingClientRect();
+        for (r = 0; r < classtitle.length; r += 2) {
+          classname = classtitle[r].getBoundingClientRect();
+          diffrence = gradetop.top - classname.top;
+
+          if (diffrence > 0 && diffrence < 80) {
             content = classtitle[r].textContent;
-            diffrence = gradetop.top - classname.top;
-
-              if (diffrence > 0 && diffrence < 80) {
-                number_grades++;
-                var letter = toGPA(classroomgrade[i].textContent);
-                sum += letter;
-              //console.log("found match");
-              index = content.search("WT");
-              ap = content.search("AP");
-              pib = content.search("PIB");
-
-                if (index > -1 || ap > -1 || pib > -1) {
-                  //console.log("adding 1");
-                  sum += 1;
-                }
-             }
+            number_grades++;
+            var letter = letter_to_number(classroomgrade[i].textContent);
+            sum += letter;
+            if (weighted) {
+              check_if_weighted(content);
+            }
           }
-
-          //console.log(letter);
-          }
-          console.log(i);
-          gpa = sum/number_grades;
-          var rounded = gpa.toFixed(2);
-          if (!isNaN(gpa)) {
-          chrome.runtime.sendMessage({myVar: rounded});
-          console.log(sum);
-          console.log(i);
-          console.log(gpa);
-          }
-        }
-
-  //unweighted
-
-        if (response.response == false) {
-
-        /*  function toGPA(x) {
-            if (x == 'A') {return 4;}
-            if (x == 'B') {return 3;}
-            if (x == 'C') {return 2;}
-            if (x == 'D') {return 1;}
-            if (x == 'F') {return 0;}
-          };*/
-          var element = document.getElementsByClassName("bodyBorder title").innerHTML;
-          //var letters = document.querySelectorAll(classroomgrade);
-          var sum = 0;
-          var grade;
-          var gpa;
-          var number_grades = 0;
-          for (i = 0; i < classroomgrade.length; i++) {
-  classtitle = document.querySelectorAll('.gradesLink b');
-for (r = 0; r < classtitle.length; r += 2) {
-  gradetop = classroomgrade[i].getBoundingClientRect();
-
-  classname = classtitle[r].getBoundingClientRect();
-  diffrence = gradetop.top - classname.top;
-              if (diffrence > 0 && diffrence < 80) {
-                number_grades++;
-                grade = toGPA(classroomgrade[i].textContent);
-                sum += grade;
-          }
-        }
-
-
-        }
-        gpa = sum / number_grades;
-        var rounded = gpa.toFixed(2);
-        if (!isNaN(gpa)) {
-          chrome.runtime.sendMessage({myVar: rounded});
         }
       }
 
-});
+      gpa = sum/number_grades;
+      var rounded = gpa.toFixed(2);
+      if (!isNaN(gpa)) {
+        if (weighted == false) {
+          chrome.runtime.sendMessage({not_weighted: rounded});
+          console.log("sent unweighted");
+          console.log(gpa);
+        } else {
+          chrome.runtime.sendMessage({weighted: rounded});
+          console.log("sent weighted");
+          console.log(gpa);
+        }
+
+     }
+     sum = 0;
+     rounded = 0;
+     number_grades = 0;
+   }
 }

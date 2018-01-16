@@ -1,3 +1,56 @@
+refresh();
+function refresh() {
+  chrome.runtime.sendMessage({gpa_unweighted: "hello"}, function(response) {
+    gpa = response.gpa;
+    console.log(gpa);
+  });
+  chrome.runtime.sendMessage({gpa: "hello"}, function(response) {
+    weighted_gpa = response.gpa;
+    console.log(weighted_gpa);
+  });
+/*if (weighted_gpa == gpa) {
+  console.log("unequal (" + gpa + " " + weighted_gpa + ")");
+}*/
+
+  window.setTimeout(timeout, 100);
+function timeout() {
+  displayWeightedButton = true;
+  if (weighted_gpa == gpa && !isNaN(gpa)) {
+    console.log("gpa and weighted_gpa are equal");
+    displayWeightedButton = false;
+  }
+
+    if (isNaN(gpa) || isNaN(weighted_gpa)) {
+      console.log("gpa is isNaN");
+      document.getElementById('textbox').style.display = "none";
+      document.getElementById('gpa').innerHTML =
+      "To receive a gpa please navigate to the \"grades\" section of Infinite Campus";
+      document.getElementById('html').style.minWidth = "100px";
+    //document.html.style.maxWidth = "200px";
+    } else {
+      if (displayWeightedButton == true) {
+        console.log("this should not be exectuting");
+        document.getElementById('donotdisplay').innerHTML = '<p class=\"weight\" id=\"question\">Weighted Grade?</p>' +
+        		'<div class=\"item\">' +
+
+        			'<input type=\"checkbox\" id=\"toggle_tomorrow_summary\" name=\"\" value=\"\">' +
+        			'<div class=\"toggle\">' +
+        				'<label for=\"toggle_tomorrow_summary\"><i></i></label>' +
+        			'</div>'+
+        		'</div>'
+      }
+      document.getElementById('gpa').innerHTML = "GPA = " + gpa + "<br>" + "Reload IC to update";
+      document.getElementById('gpa').style.marginTop = "4px";
+      document.getElementById('html').style.minWidth = "80px";
+    }
+
+
+}
+}
+
+var gpa;
+var weighted_gpa;
+var displayWeightedButton;
 chrome.tabs.query({
   active: true,
   currentWindow: true
@@ -6,16 +59,20 @@ chrome.tabs.query({
   var url = tab.url;
   console.log(url);
 });
+/*
   chrome.runtime.sendMessage({button: "test"}, function(response) {
     if (response.response == true) {
     //  console.log("checkbox state recieved checking checkbox...");
       document.getElementById("toggle_tomorrow_summary").checked = true;
+
     }
     if (response.response == false) {
     //  console.log("unchecked checkbox");
+
       document.getElementById("toggle_tomorrow_summary").checked = false;
     }
   });
+  */
   chrome.runtime.sendMessage({recievecheckstate: "test"}, function(response) {
     if (response.response == true) {
       //console.log("checkbox checked");
@@ -26,23 +83,7 @@ chrome.tabs.query({
       document.getElementById("checkbox69").checked = false;
     }
   });
-refresh();
-function refresh() {
-  chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
-    var gpa = response.farewell;
-    if (isNaN(gpa)) {
-      document.getElementById('textbox').style.display = "none";
-      document.getElementById('gpa').innerHTML =
-      "To receive a gpa please navigate to the \"grades\" section of Infinite Campus";
-      document.getElementById('html').style.minWidth = "100px";
-    //document.html.style.maxWidth = "200px";
-    } else {
-      document.getElementById('gpa').innerHTML = "GPA = " + gpa + "<br>" + "Reload IC to update";
-      document.getElementById('gpa').style.marginTop = "4px";
-      document.getElementById('html').style.minWidth = "80px";
-    }
-  });
-}
+
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("checkbox69").addEventListener("click", checkbox);
@@ -71,9 +112,9 @@ function checkbox() {
 
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+/*document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("toggle_tomorrow_summary").addEventListener("click", buttontoggle);
-});
+});*/
 
 function buttontoggle() {
 
