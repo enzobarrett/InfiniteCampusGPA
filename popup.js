@@ -22,22 +22,21 @@ function timeout() {
 
     if (isNaN(gpa) || isNaN(weighted_gpa)) {
       console.log("gpa is isNaN");
-      document.getElementById('textbox').style.display = "none";
+      document.getElementById('donotdisplay').style.display = "none";
       document.getElementById('gpa').innerHTML =
       "To receive a gpa please navigate to the \"grades\" section of Infinite Campus";
       document.getElementById('html').style.minWidth = "100px";
     //document.html.style.maxWidth = "200px";
     } else {
-      if (displayWeightedButton == true) {
+      if (displayWeightedButton == false) {
         console.log("this should not be exectuting");
-        document.getElementById('donotdisplay').innerHTML = '<p class=\"weight\" id=\"question\">Weighted Grade?</p>' +
-        		'<div class=\"item\">' +
+        document.getElementById('donotdisplay').style.display = "none";
+        document.getElementById('sem').style.top = "0";
 
-        			'<input type=\"checkbox\" id=\"toggle_tomorrow_summary\" name=\"\" value=\"\">' +
-        			'<div class=\"toggle\">' +
-        				'<label for=\"toggle_tomorrow_summary\"><i></i></label>' +
-        			'</div>'+
-        		'</div>'
+      } else {
+        document.getElementById('sem').style.top = "34";
+
+        document.getElementById('checkbox69').style.marginTop = "35";
       }
       document.getElementById('gpa').innerHTML = "GPA = " + gpa + "<br>" + "Reload IC to update";
       document.getElementById('gpa').style.marginTop = "4px";
