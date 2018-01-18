@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.recievecheckstate) {
     if (checkboxstate == null) {
       sendResponse({response: false});
-            //console.log("sending false");
+            console.log("sending false because of null");
     }
     if (checkboxstate == true) {
       //console.log("sending true");

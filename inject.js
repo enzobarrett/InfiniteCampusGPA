@@ -17,33 +17,36 @@ var number_grades = 0;
 
 
 var classroomgrade;
-/*//console.log("running");
+
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.buttonclick) {
     //console.log("Reload");
-       reload();
+      start();
 }
-});*/
+});
 //console.log("i go here");
 /*function reload() {
   window.setTimeout(all, 200);
   stage1();
 }*/
-chrome.runtime.sendMessage({recievecheckstate: "hello"}, function(response) {
-  var checkstate = response.response;
-  if (checkstate == true) {
-    console.log("sem 1");
-    classroomgrade = document.querySelectorAll('.finalGrade b');
-    window.setTimeout(delay, 0);
-  }
-  if (checkstate == false) {
-    console.log("semester 2");
-    classroomgrade = document.querySelectorAll('.inProgressGrade b');
-    window.setTimeout(delay, 0);
-  }
-});
+start();
 
+function start() {
+  chrome.runtime.sendMessage({recievecheckstate: "hello"}, function(response) {
+    var checkstate = response.response;
+    if (checkstate == true) {
+      console.log("sem 1");
+      classroomgrade = document.querySelectorAll('.finalGrade b');
+      window.setTimeout(delay, 100);
+    }
+    if (checkstate == false) {
+      console.log("semester 2");
+      classroomgrade = document.querySelectorAll('.inProgressGrade b');
+      window.setTimeout(delay, 100);
+    }
+  });
+}
 function letter_to_number(x) {
   if (x == 'A' || x == 'A+' || x == 'A-') {return 4;}
   if (x == 'B' || x == 'B+' || x == 'B-') {return 3;}
@@ -65,7 +68,7 @@ function delay() {
 
       //variables with height calculation
 
-
+weighted = false;
   for (f = 0;  f < 2; f++){
     if (f == 1) {
       weighted = true;
