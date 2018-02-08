@@ -1,11 +1,7 @@
-window.addEventListener('click',function(e){
-  if(e.target.href!==undefined){
-    chrome.tabs.create({url:e.target.href})
-  }
-})
 var weighted_;
 var url;
 var tab;
+var tabs;
 chrome.tabs.query({
   active: true,
   currentWindow: true
@@ -16,6 +12,8 @@ chrome.tabs.query({
   var index = string.search("bvsd.infinitecampus.org");
   if (index > -1) {
     console.log('found!');
+    tabs = true;
+    console.log(tabs);
   }
 });
 
@@ -68,13 +66,19 @@ function timeout() {
     //document.html.style.maxWidth = "200px";
     } else {
       if (displayWeightedButton == false) {
+        if (tabs == true) {
         document.getElementById('sem').style.display = "inline-block";
         console.log("this should not be exectuting");
         document.getElementById('donotdisplay').style.display = "none";
         document.getElementById('sem').style.top = "0";
         document.getElementById('label').style.marginTop = "0px";
+      }else {
+        console.log("i am not executing");
+        document.getElementById('toggles').style.display = "none";
+      }
 
       } else {
+        if (tabs == true) {
         document.getElementById('donotdisplay').style.display = "inline-block";
         document.getElementById('sem').style.display = "inline-block";
 
@@ -83,13 +87,20 @@ function timeout() {
 
         document.getElementById('checkbox69').style.marginTop = "35";
       }
+      if (tabs == false) {
+        console.log("I am not exectuting");
+        document.getElementById('toggles').style.display = "none";
+      }
+      }
       if (weighted_ == false) {
       document.getElementById('gpa').innerHTML = "GPA = " + gpa + "<br>" + "Reload IC to update";
     } else {
       document.getElementById('gpa').innerHTML = "GPA = " + weighted_gpa + "<br>" + "Reload IC to update";
     }
+    if (tabs == true) {
       document.getElementById('gpa').style.marginTop = "4px";
       document.getElementById('html').style.minWidth = "80px";
+    }
     }
 
 
