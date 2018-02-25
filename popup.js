@@ -2,18 +2,19 @@ var weighted_;
 var url;
 var tab;
 var tabs;
-chrome.tabs.query({
-  active: true,
-  currentWindow: true
-}, function(tabs) {
-  tab = tabs[0];
-  url = tab.url;
-  var string = url;
-  var index = string.search("bvsd.infinitecampus.org");
-  if (index > -1) {
-    console.log('found!');
-    tabs = true;
-    console.log(tabs);
+
+/*first check if the checkboxes should be checked (what state is saved)*/
+
+chrome.runtime.sendMessage({recievecheckstate: "test"}, function(response) {
+  if (response.response == true) {
+    //console.log("checkbox checked");
+    document.getElementById("checkbox69").checked = true;
+    //weighted_ = true;
+  }
+  if (response.response == false) {
+    //weighted_ = false;
+    //console.log("unchecked checkbox");
+    document.getElementById("checkbox69").checked = false;
   }
 });
 
@@ -33,8 +34,12 @@ chrome.runtime.sendMessage({button: "test"}, function(response) {
   }
 });
 
+
+
+
 refresh();
 function refresh() {
+  /*recieve the unweighted and weighted gpa*/
   chrome.runtime.sendMessage({gpa_unweighted: "hello"}, function(response) {
     gpa = response.gpa;
     console.log(gpa);
@@ -43,10 +48,6 @@ function refresh() {
     weighted_gpa = response.gpa;
     console.log(weighted_gpa);
   });
-/*if (weighted_gpa == gpa) {
-  console.log("unequal (" + gpa + " " + weighted_gpa + ")");
-}*/
-
   window.setTimeout(timeout, 100);
 function timeout() {
   displayWeightedButton = true;
@@ -55,52 +56,13 @@ function timeout() {
     displayWeightedButton = false;
   }
 
-    if (isNaN(gpa) || isNaN(weighted_gpa)) {
-      console.log("gpa is isNaN");
-      document.getElementById('donotdisplay').style.display = "none";
+    if (isNaN(gpa)) {
+    //  console.log("gpa is isNaN");
+      document.getElementById('weightedbutton').style.display = "none";
+      document.getElementById('checkbox').style.display = "none";
       document.getElementById('gpa').innerHTML =
       "To receive a gpa please navigate to the \"grades\" section of Infinite Campus";
       document.getElementById('html').style.minWidth = "100px";
-      document.getElementById('checkbox').style.display = "none";
-      document.getElementById('sem').style.display = "none";
-    //document.html.style.maxWidth = "200px";
-    } else {
-      if (displayWeightedButton == false) {
-        if (tabs == true) {
-        document.getElementById('sem').style.display = "inline-block";
-        console.log("this should not be exectuting");
-        document.getElementById('donotdisplay').style.display = "none";
-        document.getElementById('sem').style.top = "0";
-        document.getElementById('label').style.marginTop = "0px";
-      }else {
-        console.log("i am not executing");
-        document.getElementById('toggles').style.display = "none";
-      }
-
-      } else {
-        if (tabs == true) {
-        document.getElementById('donotdisplay').style.display = "inline-block";
-        document.getElementById('sem').style.display = "inline-block";
-
-        document.getElementById('checkbox').style.display = "inline-block";
-        document.getElementById('sem').style.top = "34";
-
-        document.getElementById('checkbox69').style.marginTop = "35";
-      }
-      if (tabs == false) {
-        console.log("I am not exectuting");
-        document.getElementById('toggles').style.display = "none";
-      }
-      }
-      if (weighted_ == false) {
-      document.getElementById('gpa').innerHTML = "GPA = " + gpa + "<br>" + "Reload IC to update";
-    } else {
-      document.getElementById('gpa').innerHTML = "GPA = " + weighted_gpa + "<br>" + "Reload IC to update";
-    }
-    if (tabs == true) {
-      document.getElementById('gpa').style.marginTop = "4px";
-      document.getElementById('html').style.minWidth = "80px";
-    }
     }
 
 
@@ -125,18 +87,6 @@ var displayWeightedButton;
     }
   });
 
-  chrome.runtime.sendMessage({recievecheckstate: "test"}, function(response) {
-    if (response.response == true) {
-      //console.log("checkbox checked");
-      document.getElementById("checkbox69").checked = true;
-      //weighted_ = true;
-    }
-    if (response.response == false) {
-      //weighted_ = false;
-      //console.log("unchecked checkbox");
-      document.getElementById("checkbox69").checked = false;
-    }
-  });
 
 
 document.addEventListener('DOMContentLoaded', function() {
