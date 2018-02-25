@@ -4,7 +4,10 @@ var tab;
 var tabs;
 
 /*first check if the checkboxes should be checked (what state is saved)*/
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0d908a25326c3d5e454b05bc952464e9ce8e9479
 chrome.runtime.sendMessage({recievecheckstate: "test"}, function(response) {
   if (response.response == true) {
     //console.log("checkbox checked");
@@ -17,8 +20,6 @@ chrome.runtime.sendMessage({recievecheckstate: "test"}, function(response) {
     document.getElementById("checkbox69").checked = false;
   }
 });
-
-
 chrome.runtime.sendMessage({button: "test"}, function(response) {
   if (response.response == true) {
   //  console.log("checkbox state recieved checking checkbox...");
@@ -33,10 +34,13 @@ chrome.runtime.sendMessage({button: "test"}, function(response) {
     weighted_ = false;
   }
 });
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> 0d908a25326c3d5e454b05bc952464e9ce8e9479
 refresh();
 function refresh() {
   /*recieve the unweighted and weighted gpa*/
@@ -49,6 +53,7 @@ function refresh() {
     console.log(weighted_gpa);
   });
   window.setTimeout(timeout, 100);
+}
 function timeout() {
   displayWeightedButton = true;
   if (weighted_gpa == gpa && !isNaN(gpa)) {
@@ -67,8 +72,6 @@ function timeout() {
 
 
 }
-}
-
 var gpa;
 var weighted_gpa;
 var displayWeightedButton;
@@ -121,17 +124,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function buttontoggle() {
-
-//console.log("functiom buttontoggle has been triggered");
   var checked = document.getElementById('toggle_tomorrow_summary').checked
   if (checked == false) {
   chrome.runtime.sendMessage({buttonstate: false});
   weighted_ = false;
-  //console.log("sent state of false");
   } else {
   chrome.runtime.sendMessage({buttonstate: true});
   weighted_ = true;
-  //console.log("sent state of true");
   }
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {buttonclick: "hello"}, function(response) {
