@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html id="html">
 <head>
-  <link rel="stylesheet" type="text/css" href="style.css"> <!-- link style sheet for button etc -->
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
-  <div id="gpa"> <!-- this is where the gpa will placed -->
+  <div id="gpa">
   </div>
-<div id="weightedbutton"> <!-- this is the option for weighted gpa -->
+
+<div id="donotdisplay" style="display: none;">
   <p class="weight" id="question">Weighted Grade?</p>
       <div class="item">
+
         <input type="checkbox" id="toggle_tomorrow_summary" name="" value="">
         <div class="toggle">
           <label for="toggle_tomorrow_summary"><i></i></label>
         </div>
       </div>
 </div>
-<div id="checkbox"> <!--this is the button to change what semester is displayed for the gpa-->
-  <p class="sem" id="sem">1st Semester?</p>
-  <input id="checkbox69" class="css-checkbox lrg" type="checkbox">
+    <p class="sem" id="sem">1st Semester?</p>
+<div id="checkbox">
+    <input id="checkbox69" class="css-checkbox lrg" type="checkbox">
+
   <label for="checkbox69" name="checkbox69_lbl" class="css-label lrg vlad" id="label"></label>
 </div>
 
+<body>
 </body>
 <footer>
   <script src="popup.js"></script>
